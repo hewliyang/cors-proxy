@@ -1,0 +1,7 @@
+name = "cors-proxy"
+main = "src/worker.ts"
+compatibility_date = "2025-02-08"
+
+routes = [
+  { pattern = "proxy.hewliyang.com", custom_domain = true }
+]
