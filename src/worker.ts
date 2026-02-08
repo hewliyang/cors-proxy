@@ -23,12 +23,18 @@ export default {
 
     try {
       const headers = new Headers(req.headers);
+      // Strip browser headers so upstream doesn't see this as a CORS request
+      headers.delete("origin");
+      headers.delete("referer");
+      // Strip proxy/CF metadata
       headers.delete("host");
       headers.delete("cf-connecting-ip");
       headers.delete("cf-ipcountry");
       headers.delete("cf-ray");
       headers.delete("cf-visitor");
+      headers.delete("cf-worker");
       headers.delete("x-forwarded-proto");
+      headers.delete("x-forwarded-for");
       headers.delete("x-real-ip");
 
       const response = await fetch(url, {
